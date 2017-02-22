@@ -1,0 +1,7 @@
+[shell]
+files = *.sh
+bears = ShellCheckBear
+shell = bash
+[python]
+files = *.py
+bears = PycodestyleBear

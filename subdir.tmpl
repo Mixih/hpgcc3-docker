@@ -1,0 +1,23 @@
+##########################################################################
+# subdirs template file
+##########################################################################
+# Add inputs and outputs from these tool invocations to the build variables
+C_SRCS += \
+{{sources}}
+
+OBJS += \
+{{objects}}
+
+C_DEPS += \
+{{dependencies}}
+
+
+# Each subdirectory must supply rules for building sources it contributes
+%.o: ../%.c
+	@echo 'Building file: $<'
+	@echo 'Invoking: C Compiler'
+	arm-none-eabi-gcc -mlittle-endian -mtune=arm920t -mcpu=arm920t -fomit-frame-pointer -msoft-float -mthumb-interwork -I/hpgcc3/include -Os -gdwarf-2 -Wall -c -o "$@" "$<" && \
+	echo -n '$(@:%.o=%.d)' $(dir $@) > '$(@:%.o=%.d)' && \
+	arm-none-eabi-gcc -MM -MG -P -w -mlittle-endian -mtune=arm920t -mcpu=arm920t -fomit-frame-pointer -msoft-float -mthumb-interwork -I/hpgcc3/include -Os -gdwarf-2 -Wall -c   "$<" >> '$(@:%.o=%.d)'
+	@echo 'Finished building: $<'
+	@echo ' '
